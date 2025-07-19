@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-tag-release:
+    name: Build, tag, and release Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup release please
+        uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          release-type: node
+
+      - name: Login into GitHub Container Registry
+        if: ${{ steps.release.outputs.release_created }}
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+
+      - name: Build Docker image
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          docker build \
+          -t "ghcr.io/${GITHUB_REPOSITORY}:${{ steps.release.outputs.tag_name }}" \
+          -t "ghcr.io/${GITHUB_REPOSITORY}:latest" .
+
+      - name: Release Docker image
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          docker push "ghcr.io/${GITHUB_REPOSITORY}:${{ steps.release.outputs.tag_name }}"
+          docker push "ghcr.io/${GITHUB_REPOSITORY}:latest"

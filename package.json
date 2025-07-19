@@ -1,0 +1,45 @@
+{
+  "name": "@jef/template-ts",
+  "version": "1.0.0",
+  "description": "TypeScript template that's ESM ready",
+  "license": "MIT",
+  "repository": "jef/template-ts",
+  "funding": "https://github.com/sponsors/jef",
+  "author": {
+    "name": "Jef LeCompte",
+    "url": "https://jef.buzz"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.31.0",
+    "@types/node": "^24.0.14",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.37.0",
+    "vitest": "^3.2.4"
+  },
+  "volta": {
+    "node": "22.17.1"
+  }
+}
