@@ -28,7 +28,8 @@
     "dev": "tsx src/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "bundle": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript"
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
@@ -47,6 +48,7 @@
     "typescript-eslint": "^8.37.0",
     "vitest": "^3.2.4"
   },
+  "dependencies": {},
   "volta": {
     "node": "22.17.1"
   }
