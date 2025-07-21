@@ -8,6 +8,7 @@ COPY package-lock.json package-lock.json
 RUN npm ci
 
 COPY tsconfig.json tsconfig.json
+COPY rollup.config.js rollup.config.js
 COPY src/ src/
 
 RUN npm run build
